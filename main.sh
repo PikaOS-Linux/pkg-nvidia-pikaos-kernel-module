@@ -1,5 +1,5 @@
 #! /bin/bash
-DRIVER=535
+DRIVER=545
 
 echo "$(apt show kernel-pika 2>&1 | grep -v "does not have a stable" | grep Depends: | head -n1 | cut -f2 -d":" | cut -f1 -d"," | cut -f3,4 -d"-" | tr -d ' ')" > ./linux-nvidia-modules/KERNEL
 
@@ -24,7 +24,7 @@ VERSION="$(cat ./DRIVER)-$(cat ./KERNEL)-100pika5"
 
 echo -e "linux-nvidia-modules ("$VERSION") pikauwu; urgency=medium\n\n  * New Release\n\n -- Ward Nakchbandi <hotrod.master@hotmail.com> Sat, 01 Oct 2022 14:50:00 +0200" > debian/changelog
 
-if echo $VERSION  | grep -v "$(cat ./pika_nvidia.txt)"
+if echo $VERSION | grep -v "$(cat ./pika_nvidia.txt)"
 then
   echo "driver already built"
   exit 0
@@ -32,6 +32,7 @@ fi
 
 
 if cat ./pika_nvidia.txt | grep "$(cat ./new_nvidia.txt)"
+then
   echo "driver up to date"
   exit 0
 fi
