@@ -11,11 +11,13 @@ apt update -y
 echo "$(apt show nvidia-driver-$DRIVER 2>&1 | grep -v "does not have a stable" | grep Version: | head -n1 | cut -f2 -d":" | cut -f1,2,3 -d"." | cut -f1 -d"-" | tr -d ' ')" > ./linux-nvidia-modules/DRIVER
 echo "$(apt show kernel-pika 2>&1 | grep -v "does not have a stable" | grep Depends: | head -n1 | cut -f2 -d":" | cut -f1 -d"," | cut -f3,4 -d"-" | tr -d ' ')" > ./linux-nvidia-modules/KERNEL
 echo "$(apt show nvidia-kernel-source-$DRIVER 2>&1 | grep -v "does not have a stable" | grep Version: | head -n1 | cut -f2 -d":" | tr -d ' ')" > ./linux-nvidia-modules/DRIVER_VERSION
-echo "$(apt show nvidia-driver-$DRIVER 2>&1 | grep -v "does not have a stable" | grep Depends: | head -n1 | cut -f2 -d":" | cut -f1 -d"," | cut -f3,4 -d"-" | tr -d ' ')"  > ./linux-nvidia-modules/DRIVER_PIKA
+echo "$(apt show nvidia-driver-$DRIVER 2>&1 | grep -v "does not have a stable" | grep Version: | head -n1 | cut -f2 -d":" | cut -f1,2,3 -d"." | cut -f1 -d"-" | tr -d ' ')"  > ./linux-nvidia-modules/DRIVER_PIKA
 
 cd ./linux-nvidia-modules
 
 VERSION="$(cat ./DRIVER)-$(cat ./KERNEL)-100pika5"
+
+echo -e "linux-nvidia-modules ("$VERSION") pikauwu; urgency=medium\n\n  * New Release\n\n -- Ward Nakchbandi <hotrod.master@hotmail.com> Sat, 01 Oct 2022 14:50:00 +0200" > debian/changelog
 
 if echo $VERSION | grep $(cat ./DRIVER_PIKA)
 then
