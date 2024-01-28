@@ -1,6 +1,7 @@
 #! /bin/bash
 DRIVER=535
 
+rm -rfv /etc/apt/preferences.d/*
 echo 'Package: *' > /etc/apt/preferences.d/0-a
 echo 'Pin: release c=main' >> /etc/apt/preferences.d/0-a
 echo 'Pin-Priority: 390' >> /etc/apt/preferences.d/0-a
