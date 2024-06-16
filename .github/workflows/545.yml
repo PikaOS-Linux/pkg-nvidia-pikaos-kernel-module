@@ -36,7 +36,7 @@ jobs:
       run: apt-get update -y
     
     - name: Build Package
-      run: ./545.sh
+      run: chmod +x ./545.sh && ./545.sh
 
     - name: Release Package
       run: ./release.sh

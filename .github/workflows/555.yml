@@ -36,7 +36,7 @@ jobs:
       run: apt-get update -y
     
     - name: Build Package
-      run: ./555.sh
+      run: chmod +x ./555.sh && ./555.sh
 
     - name: Release Package
       run: ./release.sh
